@@ -1,0 +1,127 @@
+{
+  "description": "Probely Alpine Linux x86_64",
+  "variables": {
+      "vm_version": "{{ env `VM_VER`}}",
+      "vm_release": "{{ env `VM_REL`}}",
+      "vm_tag": "{{env `VM_TAG`}}",
+      "vm_type": "{{env `VM_TYPE`}}",
+      "builder": "{{env `VM_BUILDER`}}",
+      "iso": "isos/alpine-virt-3.10.3-x86_64.iso",
+      "iso_url": "http://dl-cdn.alpinelinux.org/alpine/v3.10/releases/x86_64/alpine-virt-3.10.3-x86_64.iso",
+      "iso_checksum": "ac07c708733e37bb6982950f8dbd17660b44e2249b3eeb17c3e1ced9682059e0",
+      "disk_size": "5120",
+      "memory": "1024",
+      "cpus": "1"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/00base.sh",
+        "scripts/01alpine.sh",
+        "scripts/01networking.sh",
+        "scripts/02sshd.sh",
+        "scripts/03user.sh",
+        "scripts/04sudoers.sh",
+        "scripts/05docker.sh",
+        "scripts/90virtualbox.sh",
+        "scripts/90vmware.sh",
+        "scripts/91harden.sh",
+        "scripts/97farcaster-setup.sh",
+        "scripts/98minimize.sh",
+        "scripts/99disable-root.sh"
+      ],
+      "environment_vars": [
+        "BUILDER={{user `builder`}}"
+      ]
+    }
+  ],
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "virtualbox_version_file": ".vbox_version",
+      "guest_additions_mode": "disable",
+      "guest_os_type": "Linux26_64",
+      "hard_drive_interface": "sata",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
+        ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
+      ],
+
+      "iso_urls": ["{{user `iso`}}", "{{user `iso_url`}}"],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "sha256",
+
+      "headless": false,
+      "disk_size": "{{user `disk_size`}}",
+      "http_directory": "http",
+
+      "communicator": "ssh",
+      "ssh_username": "root",
+      "ssh_password": "only-used-during-build",
+      "ssh_wait_timeout": "10m",
+      "shutdown_command": "/sbin/poweroff",
+      "boot_wait": "30s",
+      "boot_command": [
+        "root<enter><wait>",
+        "ifconfig eth0 up && udhcpc -i eth0<enter><wait10>",
+        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers<enter><wait>",
+	"sed -i s#__DISK_DEVICE__#/dev/sda# $PWD/answers<enter><wait>",
+        "setup-alpine -f $PWD/answers<enter><wait5>",
+        "only-used-during-build<enter><wait>",
+        "only-used-during-build<enter><wait>",
+        "<wait10><wait10><wait10>",
+        "y<enter>",
+        "<wait10><wait10><wait10>",
+        "<wait10><wait10><wait10>",
+        "rc-service sshd stop<enter>",
+        "mount /dev/sda2 /mnt<enter>",
+        "echo 'PermitRootLogin yes' >> /mnt/etc/ssh/sshd_config<enter>",
+        "umount /mnt<enter>",
+        "reboot<enter>"
+      ]
+    },
+    {
+      "type": "qemu",
+      "accelerator": "{{user `vm_type`}}",
+      "format": "qcow2",
+      "vm_name": "probely-remote-agent",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+
+      "headless": false,
+      "disk_size": "{{user `disk_size`}}",
+      "http_directory": "http",
+
+      "iso_urls": ["{{user `iso`}}", "{{user `iso_url`}}"],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "sha256",
+
+      "communicator": "ssh",
+      "ssh_username": "root",
+      "ssh_password": "only-used-during-build",
+      "ssh_wait_timeout": "10m",
+      "shutdown_command": "/sbin/poweroff",
+
+      "boot_wait": "30s",
+      "boot_command": [
+        "root<enter><wait>",
+        "ifconfig eth0 up && udhcpc -i eth0<enter><wait10>",
+        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers<enter><wait>",
+	"sed -i s#__DISK_DEVICE__#/dev/vda# $PWD/answers<enter><wait>",
+        "setup-alpine -f $PWD/answers<enter><wait5>",
+        "only-used-during-build<enter><wait>",
+        "only-used-during-build<enter><wait>",
+        "<wait10><wait10><wait10>",
+        "y<enter>",
+        "<wait10><wait10><wait10>",
+        "<wait10><wait10><wait10>",
+        "rc-service sshd stop<enter>",
+        "mount /dev/vda2 /mnt<enter>",
+        "echo 'PermitRootLogin yes' >> /mnt/etc/ssh/sshd_config<enter>",
+        "umount /mnt<enter>",
+        "reboot<enter>"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+version: '3.3'
+
+services:
+  tunnel:
+    image: probely/farcaster-remote-agent
+    container_name: farcaster-tunnel
+    command: /farcaster/bin/start-tunnel.sh
+    volumes:
+    - __SECRETS_PATH__/remote-agent/tunnel:/farcaster/shared/secrets:z,ro
+    tmpfs:
+    - /run
+    - /farcaster/run
+    read_only: true
+    environment:
+    - FARCASTER_AGENT_HUB=hub.farcaster.probely.com:443
+    - FARCASTER_REMOTE_GATEWAY=gateway:2222
+    depends_on:
+    - gateway
+    cap_drop:
+    - ALL
+    cap_add:
+    - SETUID
+    - SETGID
+    - CHOWN
+    - FOWNER
+    restart: always
+
+  gateway:
+    image: probely/farcaster-remote-agent
+    container_name: farcaster-gateway
+    command: /farcaster/bin/start-gateway.sh
+    volumes:
+    - __SECRETS_PATH__/remote-agent/gateway:/farcaster/run/secrets:z,ro
+    tmpfs:
+    - /run
+    - /farcaster/home/cloud-tunnel
+    read_only: true
+    cap_drop:
+    - ALL
+    cap_add:
+    - SETUID
+    - SETGID
+    - FOWNER
+    - CHOWN
+    - SYS_CHROOT
+    - KILL
+    expose:
+    - "2222"
+    restart: always
