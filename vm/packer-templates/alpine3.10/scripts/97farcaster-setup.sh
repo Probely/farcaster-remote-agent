@@ -3,7 +3,7 @@ set -e
 cat << 'EOF' > /etc/init.d/farcaster-setup
 #!/sbin/openrc-run
 
-description="Run several tasks required for Farcaster connectivity"
+description="Run tasks required for Farcaster connectivity"
 
 depend() {
 	before net
