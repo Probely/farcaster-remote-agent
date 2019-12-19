@@ -31,7 +31,7 @@ sed -i s#__SECRETS_PATH__#${docker_secrets_path}#g ./config/docker-compose.yml
 
 # Init
 if [ "${install_init}" != "0" ]; then
-    echo "Install Facaster init scripts..."
+    echo "Installing Farcaster init scripts..."
     svcname="farcaster-remote-agent"
     compose_path=/var/lib/docker-compose/${svcname}
     rm -rf ${compose_path}

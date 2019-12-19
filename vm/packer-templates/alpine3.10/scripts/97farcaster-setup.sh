@@ -50,16 +50,21 @@ rc-update add farcaster-setup default
 cat << 'EOF' > /usr/local/bin/probely-farcaster-status
 #!/bin/sh
 
-TUNNEL_CONTAINER=farcaster-tunnel
-docker logs ${TUNEL_CONTAINER} 2>/dev/null | \
-	grep -E "Allocated port [0-9]+ for remote forward to gateway:2222"
-if [ "$?" = "0" ]; then
-	echo "Farcaster tunnel status: OK."
+container=farcaster-tunnel
+docker logs --tail 1 ${container} 2>&1 | \
+        grep -E "Allocated port [0-9]+ for remote forward to gateway:2222"
+if [ $? -eq 0 ]; then
+        echo "Farcaster tunnel status: OK"
 else
-	echo "Farcaster tunnel status: ERROR."
-	echo
-	echo "Please contact support with the following information:"
-	docker logs ${TUNNEL_CONTAINER}
+        echo "Farcaster tunnel status: ERROR"
+        echo
+        echo "Please contact Probely's support. Further details follow:"
+        echo
+        echo "-------------------- cut here --------------------"
+        echo
+        docker logs ${container}
+        echo
+        echo "-------------------- cut here --------------------"
 fi
 EOF
 
