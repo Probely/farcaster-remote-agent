@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 if [ "$(id -u)" != "0" ]; then
     echo "Sorry, but you need root privileges to run the installer."
