@@ -10,7 +10,7 @@ cat << 'EOF' > /etc/init.d/docker-compose
 description="Runs docker-compose instances"
 instance_name="${SVCNAME#*.}"
 compose_config="/var/lib/docker-compose/${instance_name}/docker-compose.yml"
-compose_dir="$(dirname "$(realpath "${compose_config}")")"
+compose_dir="$(dirname "$(realpath "${compose_config}" 2> /dev/null)")"
 docker_compose="/usr/bin/docker run \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v $compose_dir:$compose_dir \

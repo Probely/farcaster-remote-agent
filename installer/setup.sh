@@ -40,6 +40,7 @@ if [ "${install_init}" != "0" ]; then
     rm -f /etc/init.d/docker-compose.${svcname}
     ln -s /etc/init.d/docker-compose /etc/init.d/docker-compose.${svcname}
     rc-update add docker-compose.${svcname} default
+    /etc/init.d/docker-compose.${svcname} start
 else
     mv ./config/* ${deploy_path}
 fi

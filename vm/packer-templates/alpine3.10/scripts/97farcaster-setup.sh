@@ -50,9 +50,15 @@ rc-update add farcaster-setup default
 cat << 'EOF' > /usr/local/bin/probely-farcaster-status
 #!/bin/sh
 
+if [ "$(id -u)" != "0" ]; then
+    echo "error: you must be root to run this command"
+    exit 1
+fi
+
 container=farcaster-tunnel
 docker logs --tail 1 ${container} 2>&1 | \
-        grep -E "Allocated port [0-9]+ for remote forward to gateway:2222"
+        grep -E "Allocated port [0-9]+ for remote forward to gateway:2222" \
+        > /dev/null
 if [ $? -eq 0 ]; then
         echo "Farcaster tunnel status: OK"
 else
