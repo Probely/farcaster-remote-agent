@@ -5,7 +5,7 @@ It allows Probely's cloud-based scanners to search for vulnerabilities on custom
 
 # How to build
 
-We use (Packer)[https://packer.io] to build a virtual appliance. We support several types of builders, such as VirtualBox, and VMWare.
+We use [Packer](https://packer.io) to build a virtual appliance. We support several types of builders, such as VirtualBox, and VMWare.
 
 To build an Agent appliance using VirtualBox, run the following commands:
 
@@ -22,5 +22,4 @@ Simply import the resulting virtual machine into your virtualization solution ma
 
 # Acknowlegdements
 
-The packer templates are inspired by https://github.com/maier/packer-templates.
-Our thanks to the original authors.
+The packer templates are inspired by [packer-templates](https://github.com/maier/packer-templates). Our thanks to the original authors.
