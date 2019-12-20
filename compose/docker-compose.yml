@@ -12,7 +12,7 @@ services:
     - /farcaster/run
     read_only: true
     environment:
-    - FARCASTER_AGENT_HUB=hub.farcaster.probely.com:443
+    - FARCASTER_AGENT_HUB=__AGENT_HUB_HOST__:443
     - FARCASTER_REMOTE_GATEWAY=gateway:2222
     depends_on:
     - gateway
