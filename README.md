@@ -10,7 +10,7 @@ This broadens Probely's vulnerability scanning capabilities to internal applicat
 After being installed on-premises, the Agent creates an encrypted and authenticated tunnel,
 in which traffic flows securely between Probely and your network.
 
-The Agent is open-source, and the code is freely available. You can audit it if you choose to do so.
+The Agent is open-source, and the code is freely available.
 
 The following diagram shows an example network topology depicting an on-premises network,
 the Remote Agent, the Remote Agent Hub (where remote agents connect to) and Probely's cloud.
