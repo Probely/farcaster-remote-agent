@@ -20,7 +20,7 @@ the Remote Agent, the Remote Agent Hub (where remote agents connect to) and Prob
 ## Security considerations
 
 Installing third-party software components on a network carries an inherent risk.
-Being security professionals ourselves, we are very aware of this risk.
+Being security professionals ourselves, we are very aware of it.
 That is why Probely is designed with a security mindset from the ground up - 
 the Remote Agent is no exception to this.
 
@@ -122,7 +122,7 @@ To install the Remote Agent, please follow these steps:
 1.  After the VM starts, use the default Remote Agent credentials to log in (user: `probely`, password: `changeme`)
 You can log into the VM on the local console, or via SSH (IP is assigned via DHCP).
 The SSH server accepts connections from private IP address ranges only.
-This is done to mitigate potential compromises if an unconfigured appliance is accidentally exposed to the Internet.
+This is done to mitigate potential compromises, if an unconfigured appliance is accidentally exposed to the Internet.
 The allowed SSH client IP ranges are:
   * `10.0.0.0/8`
   * `172.16.0.0/12`
@@ -145,7 +145,7 @@ To make sure that the connection is working properly, run the following command:
 ### Option 2: Docker containers
 
 A working Docker installation and `docker-compose` must be available for these instructions to work.
-Typically, you would do this on a VM.  
+You should follow this procedure on a VM with the aforementioned packages installed.
 
 1. You should have been given a `probely-agent-<id>.run` script, which is tailored to your installation.
 If you do not have this script, please contact Probely’s support team.
