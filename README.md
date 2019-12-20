@@ -135,7 +135,7 @@ Be sure to choose a strong password. Ideally, you should disable password login 
 and enforce authentication using public keys or certificates.
 This is outside the scope of this document, but we can assist you in doing so through the support channels.
 
-* You should have been given a `probely-agent-<id>.run` file, which is an installer script tailored to your specific Agent. If you do not have the installer script, please contact Probely's support team. If you want to know how the installer is built and what it does, please refer to the Installer section.
+* You should have been given a `probely-agent-<id>.run` file, which is an installer script tailored to your specific Agent. If you do not have the installer script, please contact Probely's support team. If you want to know how the installer is built and what it does, please refer to the [Installer](#installer) section.
 
 * To configure the Agent, run the following commands on the Remote Agent Virtual Appliance:
 ```bash
@@ -159,7 +159,7 @@ You can use the `docker-compose.yml` file as a reference to deploy the Remote Ag
 
 Both [Docker](https://docs.docker.com/v17.09/engine/installation/) and [Docker Compose](https://docs.docker.com/compose/install/) must be installed for these instructions to work. Please follow this procedure on a VM with those requirements met.
 
-You should have been given a `probely-agent-<id>.run` file, which is an installer script tailored to your specific Agent. If you do not have the installer script, please contact Probely's support team. If you want to know how the installer is built and what it does, please refer to the Installer section.
+You should have been given a `probely-agent-<id>.run` file, which is an installer script tailored to your specific Agent. If you do not have the installer script, please contact Probely's support team. If you want to know how the installer is built and what it does, please refer to the [Installer](#installer) section.
 
 * Run the following commands to extract the Agent keys and configuration files:
 ```bash
@@ -250,4 +250,4 @@ cd vm/packer-templates/alpine3.10
 
 After Packer finishes building the VM, you should have OVF and VMDK files available on the `output-virtualbox-iso` directory. Note that the output directory name and contents may differ, depending on the underlying VM builder you chose to create the VM appliance.
 
-You can now install the VM using the steps described in the Virtual appliance installation section. If applicable, remember to use your custom installer.
+You can now install the VM using the steps described in the Virtual appliance installation section. If applicable, remember to use your custom [installer](#installer).
