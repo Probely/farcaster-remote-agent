@@ -1,14 +1,12 @@
 CONTAINER=farcaster-remote-agent
 
-.PHONY: all docker push clean ssh_configs
+.PHONY: all docker push clean
 
-ssh_configs:
-	PORT=2222 PERMIT_TTY=yes MAX_SESSIONS=15 \
-		 ../common/etc/build-sshd_config.sh > etc/ssh/sshd_config
-	cp ../common/etc/ssh_config etc/ssh/ssh_config
-
-docker: ssh_configs
+docker:
 	docker build -f docker/Dockerfile -t $(CONTAINER) .
+
+docker-alpine:
+	docker build -f docker/alpine/Dockerfile -t $(CONTAINER) .
 
 push: docker
 	docker tag $(CONTAINER):latest probely/$(CONTAINER):latest
