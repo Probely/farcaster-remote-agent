@@ -18,7 +18,8 @@ if [ "$keybundle" == "" ] || [ ! -f "$keybundle" ]; then
     exit 1
 fi
 
-version=0.0.1
+keyid=$(basename ${keybundle} | sed s/.tar.gz$//)
+
 tmp_dir=$(make_tmp_dir)
 mkdir -m 0700 -p "${tmp_dir}/keys"
 mkdir -m 0700 -p "${tmp_dir}/config"
@@ -28,7 +29,7 @@ cp ../compose/docker-compose.yml "${tmp_dir}/config"
 
 ./makeself/makeself.sh --gzip --ssl-encrypt --nomd5 --nocrc --sha256 --license ../LICENSE \
     ${tmp_dir} \
-    target/probely-agent-${version}.run \
+    target/probely-agent-${keyid}.run \
     "Probely Farcaster Remote Agent" \
     ./setup.sh
 
