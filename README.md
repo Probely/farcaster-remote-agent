@@ -47,7 +47,7 @@ cryptographic algorithms choices that meet the state-of-the-art security recomme
 **Simplicity**
 
 * We are firm believers that simplicity enables security. The Agent follows simple design decisions, and uses industry-standard components whenever possible
-* We keep network requirements to a minimum. This means, for example, that public IP addresses, complex firewall rules, and other typical network requirements are unnecessary
+* We keep network requirements to a minimum. This means, for example, that public IP addresses, complex firewall rules, and other typical network requirements are unnecessary or minimized
 * The Agent requires minimal hardware resources and is designed to scale easily.  
 
 ## System Resources
@@ -95,7 +95,7 @@ Notes:
 
 In this section, we describe three different procedures to deploy the Agent on your on-premises network:
 
-1. **Virtual Machine "appliance"**. The VM contains the required components to run the Agent.
+1. **Using a pre-built VM "appliance"**. The VM contains the required components to run the Agent.
 This may be a simpler approach if you have a virtualization solution already running.
 (Hyper-V, KVM, VirtualBox, VMWare, among others)
 
@@ -105,7 +105,7 @@ Docker containers. (e.g., a Kubernetes cluster)
 
 1. **Building the VM and containers from source**.
 
-### Option 1: Virtual Machine
+### Option 1: Virtual appliance
 
 The Remote Agent is packaged as a ZIP archive containing an Open Virtual Format (OVF) file and a Virtual Machine Disk (VMDK).
 You should be able to import the Agent on any modern virtualization solution.
@@ -123,9 +123,12 @@ To install the Remote Agent, please follow these steps:
 You can log into the VM on the local console, or via SSH (IP is assigned via DHCP).
 The SSH server accepts connections from private IP address ranges only.
 This is done to mitigate potential compromises if an unconfigured appliance is accidentally exposed to the Internet.
-The allowed SSH client IP ranges are: `10.0.0.0/8`, `172.16.0.0/12`, and `192.168.0.0/16`.
+The allowed SSH client IP ranges are:
+  * `10.0.0.0/8`
+  * `172.16.0.0/12`
+  * `192.168.0.0/16`
 
-1.  After logging on the VM for the first time, you will be requested to change the default password.
+5.  After logging on the VM for the first time, you will be requested to change the default password.
 Be sure to choose a strong password. Ideally, you should disable password login via SSH,
 and enforce authentication using public keys or certificates. This is outside the scope of this document,
 but we can assist you in doing so through the support channels.
