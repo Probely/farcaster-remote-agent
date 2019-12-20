@@ -218,7 +218,7 @@ chmod +x ./probely-agent-<id>.run
 tar -zcpvf ./tmp/<id>.tar.gz -C ./tmp/agent-installer/keys .
 ```
 
-The installer build script reads the AGENT_DOCKER_IMAGE environment variable. If set, it will use it to find the Agent Docker images - e.g. your custom-built Docker images. If unset, Probely’s default Docker images are used.
+The installer build script reads the `AGENT_DOCKER_IMAGE` environment variable. If set, it will use it to find the Agent Docker images - e.g. your custom-built Docker images. If unset, Probely’s default Docker images are used.
 
 The build script will ask you for a password to secure the keys. Please choose a strong password.
 
