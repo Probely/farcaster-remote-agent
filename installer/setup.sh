@@ -27,9 +27,7 @@ chmod -R go-rwx ${secrets_path}
 chown -R root:root ${secrets_path}
 
 # Containers
-agenthub="$(<${secrets_path}/remote-agent/tunnel/env/AGENT_HUB_HOST)"
 sed -i s#__SECRETS_PATH__#${docker_secrets_path}#g ./config/docker-compose.yml
-sed -i s/__AGENT_HUB_HOST__/${agenthub}/g ./config/docker-compose.yml
 
 # Init
 if [ "${install_init}" != "0" ]; then

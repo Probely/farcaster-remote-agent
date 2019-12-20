@@ -68,7 +68,7 @@
 # - 2.2.0 : Many bugfixes, updates and contributions from users. Check out the project page on Github for the details.
 # - 2.3.0 : Option to specify packaging date to enable byte-for-byte reproducibility. (Marc Pawlowsky)
 # - 2.4.0 : Optional support for SHA256 checksums in archives.
-# - 2.4.0_probely: Patched to use a more modern KDF (PBKDF2) with an 1000000 iteration count
+# - 2.4.0_probely: Patched to use a more modern KDF (PBKDF2) with a 1500000 iteration count
 #
 # (C) 1998-2018 by Stephane Peter <megastep@megastep.org>
 #
@@ -80,7 +80,7 @@
 MS_VERSION=2.4.0_probely
 MS_COMMAND="$0"
 OPENSSL_CIPHER="-aes-256-cbc"
-OPENSSL_KDF_ITER=1000000
+OPENSSL_KDF_ITER=1500000
 unset CDPATH
 
 for f in "${1+"$@"}"; do
