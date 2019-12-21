@@ -35,7 +35,7 @@ agenthub="$(<${tmp_dir}/keys/tunnel/env/AGENT_HUB_HOST)"
 sed -i s/__AGENT_HUB_HOST__/${agenthub}/g ${tmp_dir}/config/docker-compose.yml
 sed -i s#__DOCKER_IMAGE__#${docker_image}#g "${tmp_dir}/config/docker-compose.yml" 
 
-cd ${script_dir} && ./makeself/makeself.sh --gzip --ssl-encrypt --nomd5 --nocrc \
+cd ${script_dir} && mkdir -p ${script_dir}/target && ./makeself/makeself.sh --gzip --ssl-encrypt --nomd5 --nocrc \
     --sha256 --license ${script_dir}/../LICENSE \
     ${tmp_dir} \
     ${script_dir}/target/probely-agent-${keyid}.run \
