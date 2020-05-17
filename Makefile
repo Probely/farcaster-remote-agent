@@ -5,9 +5,6 @@ CONTAINER=farcaster-remote-agent
 docker:
 	docker build -f docker/Dockerfile -t $(CONTAINER) .
 
-docker-alpine:
-	docker build -f docker/alpine/Dockerfile -t $(CONTAINER) .
-
 push: docker
 	docker tag $(CONTAINER):latest probely/$(CONTAINER):latest
 	docker push probely/$(CONTAINER):latest

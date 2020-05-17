@@ -3,9 +3,9 @@
 Port 2222
 
 # Keys
-HostCertificate /farcaster/run/secrets/host_certificate
-HostKey /farcaster/run/secrets/host_key
-TrustedUserCAKeys /farcaster/run/secrets/trusted_user_ca.pub
+HostCertificate /farcaster/restricted/secrets/host_certificate
+HostKey /farcaster/restricted/secrets/host_key
+TrustedUserCAKeys /farcaster/restricted/secrets/trusted_user_ca.pub
 
 # Ciphers and keying
 CASignatureAlgorithms ssh-ed25519

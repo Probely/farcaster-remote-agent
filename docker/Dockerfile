@@ -22,8 +22,7 @@ RUN set -ex \
     && mkdir -p -m 0711 /farcaster \
     && mkdir -p -m 0711 /farcaster/bin \
     && mkdir -p -m 0711 /farcaster/etc/ssh \
-    && mkdir -m 0700 /farcaster/share \
-    && mkdir -m 0711 /farcaster/run \
+    && mkdir -m 0700 /farcaster/restricted \
     && mkdir -m 0711 /farcaster/home \
     \
     && groupadd -g $REMOTE_TUN_ID remote-tunnel \

@@ -3,13 +3,12 @@ version: '3.3'
 services:
   tunnel:
     image: __DOCKER_IMAGE__
-    container_name: farcaster-tunnel
+    container_name: tunnel
     command: /farcaster/bin/start-tunnel.sh
     volumes:
-    - __SECRETS_PATH__/remote-agent/tunnel:/farcaster/shared/secrets:z,ro
+    - __SECRETS_PATH__/remote-agent/tunnel:/farcaster/restricted/secrets:z,ro
     tmpfs:
     - /run
-    - /farcaster/run
     read_only: true
     environment:
     - FARCASTER_AGENT_HUB=__AGENT_HUB_HOST__:443
@@ -27,13 +26,12 @@ services:
 
   gateway:
     image: __DOCKER_IMAGE__
-    container_name: farcaster-gateway
+    container_name: gateway
     command: /farcaster/bin/start-gateway.sh
     volumes:
-    - __SECRETS_PATH__/remote-agent/gateway:/farcaster/run/secrets:z,ro
+    - __SECRETS_PATH__/remote-agent/gateway:/farcaster/restricted/secrets:z,ro
     tmpfs:
     - /run
-    - /farcaster/home/cloud-tunnel
     read_only: true
     cap_drop:
     - ALL
