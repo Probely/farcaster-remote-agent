@@ -14,6 +14,10 @@ if [ "${FARCASTER_REMOTE_GATEWAY}" = "" ]; then
     exit 1
 fi
 
+if [ "$(echo ${FARCASTER_DEBUG} | grep -P '(1|on|enable|true)')" != "" ]; then
+        set -x
+fi
+
 AGENT_HUB_HOST=$(echo ${FARCASTER_AGENT_HUB} | cut -d ':' -f 1)
 AGENT_HUB_PORT=$(echo ${FARCASTER_AGENT_HUB} | cut -d ':' -f 2)
 
