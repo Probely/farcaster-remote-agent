@@ -79,12 +79,12 @@ To specify a port range, we use the `:` character. For example, `1024:2048` mean
 | Name           | Source     | Destination                 | Protocol     | Source Port     | Destination Port |
 | -------------- | ---------- | --------------------------- | ------------ | --------------- | -------------------- |
 | API            | `agent-ip`   | `api.probely.com`             | `TCP`          | `1024:`           | `443`                  |
-| Farcaster      | `agent-ip`   | `hub.farcaster.probely.com`   | `TCP`          | `1024:`           | `443`                  |
+| Farcaster      | `agent-ip`   | `hub.farcaster.probely.com`   | `TCP`, `UDP`   | `1024:`           | `443`                  |
 | NTP            | `agent-ip`   | `any`                         | `UDP`          | `any`             | `123`                  |
 | DNS            | `agent-ip`   | `<internal-dns-resolvers>` | `TCP`, `UDP`     | `any`             | `53`                   |
 | DHCP           | `agent-ip`   | `any`                         | `UDP`          | `67:68`           | `67:68`                |
 | Scan           | `agent-ip`   | `<scan-target>`<sup>1</sup>           | `TCP`          | `1024:`           | `<target-port>`<sup>2</sup>    |
-| Docker Hub     | `agent-ip`   | `hub.docker.com`              | `TCP`          | `1024:`           | `443`                  |
+| Docker         | `agent-ip`   | `registry.docker.io`              | `TCP`          | `1024:`           | `443`                  |
 | Update servers | `agent-ip`   | `<alpine-update-servers>`  | `TCP`          | `1024:`           | `80`, `443`              |  
 
 Notes:
